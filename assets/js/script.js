@@ -97,11 +97,24 @@ function getDate() {
     var currentDate = moment().format("YYYY MMM, Do");
     $("#currentDay").text(currentDate)
 };
+// save plans to localStorage
+function savePlans() {
+    //$(".container").data
+    localStorage.setItem("planDay", JSON.stringify(planDay));
+}
+// get any plans saved in localStorage
+function init() {
+    var savedPlans = JSON.parse(localStorage.getItem("planDay"));
+    if (savedPlans) {
+        planDay = savedPlans
+    }
+    savePlans();
+}
 getDate();
 // Using jQuery, bootstrap, and moment to set up schedule
 planDay.forEach(function (thisPlan) {
-    var hourRow = $('<form>').attr({ "class": "row" });
-    $(".container").append(hourRow);
+    var planRow = $('<form>').attr({ "class": "row" });
+    $(".container").append(planRow);
     var hourTime = $("<div>")
         .text(thisPlan.hour + thisPlan.sun)
         .attr({ "class": "col-md-2 hour" });
@@ -121,5 +134,15 @@ planDay.forEach(function (thisPlan) {
     var saveGame = $("<button>")
         .attr({ "class": "col-md-1 saveBtn" });
     saveGame.append(savePlan);
-    hourRow.append(hourTime, hourPlan, saveGame);
+    planRow.append(hourTime, hourPlan, saveGame);
 });
+init();
+// when the save button is clicked it will be saved to the localStorage
+$(".saveBtn").on("click", function(event) {
+    event.preventDefault();
+    var savedLocal = $(this).parent(".description").children(".future").attr("id");
+    planDay[savedLocal] = $(this).parent(".description").children(".future").val();
+    console.log(savedLocal);
+   savePlans();
+   init();
+})
