@@ -18,9 +18,14 @@ textarea{
 .jumbotron {
   text-align: center;
   background-color: transparent;
-  color: black;
+  color: hsl(286, 100%, 39%);
   border-radius: 0;
   border-bottom: 10px solid black;
+  background-image: url("../images/coffee.jpg");
+  background-position: 50% 61%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: relative;
 }
 
 #currentDay {

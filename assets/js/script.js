@@ -128,7 +128,7 @@ planDay.forEach(function (thisPlan, index) {
     planData.val(JSON.parse(localStorage.getItem("planDay"))[index].plan)
     hourPlan.append(planData);
     planData.attr("id", thisPlan.id);
-    if (thisPlan.time == moment().format("HHmm")/*||thisPlan.time++ == moment().format("HHmm")*/) {
+    if (thisPlan.time == moment().format("HHmm")) {
         planData.attr({ "class": "present" })
     } else if (thisPlan.time < moment().format("HHmm")) {
         planData.attr({ "class": "past" })
